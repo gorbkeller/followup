@@ -10,10 +10,19 @@ This repository contains a lightweight script ('followup.sh') which:
 REQUIREMENTS:
 - a working mutt (http://www.mutt.org/) installation
 - a file in the root of this repo called "clients.csv" with the following format:
-    CLIENT_FN,CLIENT_LN,STUDENT_FN,STUDENT_LN,EMAIL,PHONE,INSTRUMENT
+    CLIENT_FN,CLIENT_LN,STUDENT_FN,STUDENT_LN,EMAIL,PHONE,SUBJECT
     (this can be modified to match your use case -- this is for private
     music lessons)
-- a local directory (default expected directory name is "notes") at the root of this repo
+- a directory at the root of this repo containing relevant attachments
+
+
+this script works by matching the student name to the first name listed in the
+filename of the relevant attachment.
+
+USAGE:
+
+    $ ./followup.sh [client csv] [attachment directory]
+
 
 GETTING STARTED:
 1. check that your mutt installation works (namely, that you can send emails from mutt)
