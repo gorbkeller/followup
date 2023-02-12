@@ -4,12 +4,24 @@ echo "now running ~ followup ~"
 echo "written by Gordon Keller"
 echo "created: 1/29/23"
 echo "modified: 1/29/23"
+echo ""
 sleep 1
 
-# parse out the test flag (expect '-t')
+# parse the client file and directory arguments
 client_csv=$1
 attch_dir=$2
 
+# argument checks
+if [ ! -e $client_csv ]; then 
+    echo "Client file '$client_csv' does not exist."
+    exit -1
+fi
+if [ ! -d $attch_dir ]; then 
+    echo "Directory '$attch_dir' does not exist."
+    exit -1
+fi
+
+# enter the main loop (parses the clients file, finds matching files, sends them)
 i=1
 while IFS=, read -r cfn cln sfn sln email phone inst
 do
@@ -49,6 +61,7 @@ do
 
         # if the student name matches the current line student name,
         # copy the path name to the output path and proceed
+        echo "checking filename against current job: $student,$sfn"
         if [ ${student,,} == ${sfn,,} ]; then
             note_path=$FILE
             echo "Found note for $sfn -- attach to email -> $note_path"
